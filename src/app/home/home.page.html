@@ -1,20 +1,55 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Blank
+      DivisApp 19001704
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">DivisApp 19001704</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Conversor de Divisas</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">GTQ a USD (Tasa: {{ 8 | currency:'GTQ' }})</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <!-- 
+          ACTUALIZACIÓN: Usamos la sintaxis moderna de Ionic 7+.
+          label-placement="floating" maneja mejor el espacio vertical 
+          que la etiqueta ion-label antigua.
+        -->
+        <ion-input
+          class="custom-input ion-margin-bottom"
+          fill="outline"
+          label="Cantidad en Quetzales (Q)"
+          label-placement="floating"
+          type="number"
+          [(ngModel)]="cantidadQuetzales"
+          placeholder="0.00"
+        ></ion-input>
+    
+        <!-- Botón -->
+        <ion-button expand="block" (click)="convertir()" [disabled]="!cantidadQuetzales" class="ion-margin-top">
+          Calcular
+          <ion-icon slot="end" name="calculator-outline"></ion-icon>
+        </ion-button>
+    
+        <!-- Resultado -->
+        <div *ngIf="resultadoDolares !== null" class="ion-margin-top ion-text-center result-container">
+          <h3>Equivalente:</h3>
+          <h1 color="success">
+            {{ resultadoDolares | currency:'USD':'symbol':'1.2-2' }}
+          </h1>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
